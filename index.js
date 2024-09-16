@@ -1,38 +1,48 @@
 {/* <div id="string" >String:</div>
     <input class='User' id="input" type="text" placeholder="Enter string" >  */}
     const string = document.getElementById('string')
-    const re = document.getElementById('re')    
-    const array = [
-        { id: 1, age: 25 },
-        { id: 2, age: 26 },
-        { id: 3, age: 26 },
-        { id: 2, age: 27 },
-    ]
+    const re = document.getElementById('re') 
+    const pa = document.getElementById('pa')    
+    const input = document.getElementById('input')
+    const btn = document.getElementById('btn')    
     
-    // function StringId(){
-    //     const idArray = array.map(obj=>obj.id)
-    //     const arr = []
-    //     let IdString = ''
-
-    //     for(let id of idArray){
-    //         if(!arr.includes(id)){
-    //             arr.push(id)
-                
-    //         }
-    //     }
-    //     for(let i = 0; i < arr.length; ++i){
-    //         if(i !== arr.length-1){
-    //             string.innerHTML += `${arr[i]}, `
-    //         }else{
-    //             string.innerHTML += `${arr[i]}  `
-    //         }
-    //     }
+    function reverse(){
+        let str = input.value
+        let reverse = ''
+        // for (i=0;i < str.length; i++){
+        //     reverse = str[i] + reverse 
+        // }
+        for (let i of str){
+            reverse = i + reverse 
+        }
+        string.innerHTML = 'String: ' + str
+        re.innerHTML = 'Reverse: ' + reverse
+    }
+    
+    // function reverse2(){
+    //     const str = input.value
+    //     const arr = str.split('')
+    //     const reverse = arr.reverse().join('')
+    //     string.innerHTML = 'String: ' + str
+    //     re.innerHTML = 'Reverse: ' + reverse
     // }
     
-    function StringId(){
-        const idArray = array.map(obj=>obj.id)
-        const arr = [...new Set(idArray)]
-        string.innerHTML = arr.join(', ')
+    function reverse2(){
+        const str = input.value.split('').reduce((accumulator, currentValue)=>(currentValue + accumulator ))
+        let palindrome
+        const Palindrome = () => input.value.split('').every((char, index) =>{
+            palindrome = (char === input.value[str.length - index - 1])
+        }) 
+        Palindrome()
+        if(palindrome){
+            palindrome = 'yes'
+        }else{
+            palindrome = 'no'
+        }
+        string.innerHTML = 'String: ' + input.value
+        re.innerHTML = 'Reverse: ' + str
+        pa.innerHTML = 'Palindrome: ' + palindrome
     }
-
-    StringId()
+    
+    btn.addEventListener('click', reverse2)
+    
