@@ -7,27 +7,37 @@
     const input2 = document.getElementById('input2')
     const btn = document.getElementById('btn')    
     
-    function reverse(){
-        let str = input.value
-        let reverse = ''
-        // for (i=0;i < str.length; i++){
-        //     reverse = str[i] + reverse 
-        // }
-        for (let i of str){
-            reverse = i + reverse 
-        }
-        string.innerHTML = 'String: ' + str
-        re.innerHTML = 'Reverse: ' + reverse
-    }
 
     function reverse2(){
-        const str = input.value.split('').reduce((accumulator, currentValue)=>(currentValue + accumulator ))
         let anagram
+       
+        const buildCharMap = (str)=>{
+            const charMap = new Map()           
+            for(const char of clean(str)){
+             charMap.set(char, charMap.get(char) + 1 || 1)
+            }
+            return charMap 
+         }
+         const clean = (str) => {
+             return str.toLowerCase().replaceAll(' ','')
+         }
 
-        const Anagram = () => input.value.split('').every((char, index) =>{
-            anagram = (char === input2.value[str.length - index - 1])
-        }) 
-        Anagram()
+        let CharMapA = buildCharMap(input.value)
+        let CharMapB = buildCharMap(input2.value)
+        
+        anagram = true
+
+        if(CharMapA.size !== CharMapB.size){
+             anagram = false
+        }
+
+        for(const [char,count] of CharMapA){
+            if(CharMapB.get(char) !== count){
+                anagram = false
+            }
+            
+        } 
+ 
         if(anagram){
             anagram = 'yes'
         }else{
